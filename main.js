@@ -167,8 +167,10 @@ $(document).ready(function() {
       if (jump && jumpLength >= CONST_PI) {
         if (playerPassedTheWall) {
           playerScore += collision ? 0 : 1;
-          jumpsStats.push(new JumpStats(wallHeightAtJumpStart, distanceToWallAtJumpPrepare, distanceToWallAtJumpStart, height, jumpQuality));
+          passedWalls[playerPassedTheWall.getIdx()] = true;
+          jumpsCount = Object.keys(passedWalls).length ;     
         } 
+        jumpsStats.push(new JumpStats(wallHeightAtJumpStart, distanceToWallAtJumpPrepare, distanceToWallAtJumpStart, height, jumpQuality));
         jump = false;
         playerY = 0.0;
         height = 0.0;
@@ -176,7 +178,7 @@ $(document).ready(function() {
         collision = false;
       } 
 
-      if (playerPassedTheWall) {
+      if (!jump && playerPassedTheWall) {
         passedWalls[playerPassedTheWall.getIdx()] = true;
         jumpsCount = Object.keys(passedWalls).length ;
         collision = false;
@@ -194,30 +196,9 @@ $(document).ready(function() {
           startJump(p);
         });
 
-      //if (!collision) {
-        deltaTime = 1.0 * gameSpeed;
-        totalTime += deltaTime;
-      //} else {
-      //  deltaTime = 0.0;
-      //}
-      
-      // if (collision) {
-      //   // cpuPlayer.restart();
-      //   //world.move(-totalTime);
-      //   //totalTime = 0.0;
-      //   //playerScore = 0;
-      //   //jumpsCount = 0;
-      //   collision = false;
-      //   //time = 0;
-      //   //jump = false;
-      //   //playerY = 0.0;
-      //   //height = 0.0;
-      //   //distanceToWallAtJumpPrepare = 0;
-      //   //distanceToWallAtJumpStart = 0;
-      //   playerPassedTheWall = false;
-      // }
+      deltaTime = 1.0 * gameSpeed;
+      totalTime += deltaTime;
 
-      //gameSpeed += 0.01;
       requestAnimFrame(function() {
         animate();
       });

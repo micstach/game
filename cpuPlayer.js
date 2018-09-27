@@ -51,7 +51,7 @@ CpuPlayer.prototype.findWallDistanceToPrepareJump = function() {
 
 CpuPlayer.prototype.optimize = function(jump) {
     let rate = this.jumpRating(jump._jumpDistanceToWallAtPrepare, jump._jumpDistanceAtStart, jump._wallHeight);
-    let optimizationSteps = 1000 * (1.0 - rate.quality);
+    let optimizationSteps = Math.max(25 * (1.0 - rate.quality), 5);
     console.log('initial quality: ' + rate.quality);
     console.log('optimization steps: ' + optimizationSteps)
     for (let j=0;j<optimizationSteps; j++) { 

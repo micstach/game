@@ -32,17 +32,3 @@ World.prototype.move = function(deltaTime) {
         this._walls[i].move(deltaTime);
     }
 };
-
-// World.prototype.render = function(context, start, end) {
-//     let walls = this.getVisible(start, end);
-//     for (let i=0; i<walls.length; i++) {
-//       let wall = walls[i];
-//       let x = wall.getX() - s;
-//       context.beginPath();
-//       context.moveTo(x, _groundLevel + 2);
-//       context.lineTo(x, _groundLevel - wall.getHeight());
-//       context.strokeStyle = "#000000";
-//       context.stroke();
-//     }
-// };
-
